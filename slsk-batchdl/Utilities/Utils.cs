@@ -648,8 +648,18 @@ public static class Utils
                 if ((path1[i] == '/' || path1[i] == '\\') && (path2[i] == '/' || path2[i] == '\\'))
                     commonPathLength = i + 1;
                 else if (path1[i] != path2[i])
-                    break;
+                    return commonPathLength;
             }
+
+            if (minLength == path1.Length && minLength == path2.Length)
+                return minLength;
+
+            if (minLength == path1.Length && path2.Length > minLength && (path2[minLength] == '/' || path2[minLength] == '\\'))
+                return minLength;
+
+            if (minLength == path2.Length && path1.Length > minLength && (path1[minLength] == '/' || path1[minLength] == '\\'))
+                return minLength;
+
             return commonPathLength;
         }
 
